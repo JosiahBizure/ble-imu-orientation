@@ -49,8 +49,8 @@ const char* rxUUID      = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"; // Client to A
 const char* txUUID      = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"; // Arduino to Client
 
 BLEService uartService(serviceUUID);
-BLECharacteristic txChar(txUUID, BLENotify, 182);
-BLECharacteristic rxChar(rxUUID, BLEWrite, 182);
+BLECharacteristic txChar(txUUID, BLENotify, 512);
+BLECharacteristic rxChar(rxUUID, BLEWrite, 512);
 
 // ============================================================================
 //                         System Initialization
@@ -77,6 +77,7 @@ void InitializeIMUAndBLE() {
 
   BLE.setLocalName("UNO_R4_UART");       // What shows up to clients scanning for devices
   BLE.setDeviceName("UNO_R4_UART");      // Internal BLE identifier
+  BLE.setAvertisedService(uartService);
 
   uartService.addCharacteristic(txChar); // Outgoing data to client
   uartService.addCharacteristic(rxChar); // Incoming data from client
